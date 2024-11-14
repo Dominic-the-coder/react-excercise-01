@@ -1,14 +1,26 @@
-import TodoItem from "./item";
+import AddItem from "./item";
 
-function TodoList(props) {
-  const { todos } = props;
+function ItemList(props) {
+  const { todos, onItemDelete, onTickComplete } = props;
   return (
-    <ul className="list-group">
-      {todos.map((item) => {
-        return <TodoItem text={item.text} isCompleted={item.isCompleted} />;
+    <ul className="list-group ">
+      {todos.map((item/*, index*/) => {
+        return (
+          <AddItem
+            key={item.id}
+            // num={index + 1}
+            {...item}
+            onItemDelete={(id) => {
+              onItemDelete(id);
+            }}
+            onTickComplete={(id) => {
+              onTickComplete(id);
+            }}
+          />
+        );
       })}
     </ul>
   );
 }
 
-export default TodoList;
+export default ItemList;
